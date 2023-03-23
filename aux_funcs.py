@@ -192,7 +192,7 @@ def sns_grouped_scatterplot(dataframe, x, y, gb):
     Retorno: La función devuelve un gráfico de dispersión de las variables x e y para cada valor de la variable definida en
     el parámetro gb.
     '''
-    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2, size=3)
+    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2)
     grid = grid.map(sns.scatterplot, x, y, marker='o', s=50, color = 'darkblue')
     
     
