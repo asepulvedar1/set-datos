@@ -263,18 +263,18 @@ def f_test_hipotesis(df,variable,binarize):
     t, p_val = stats.ttest_ind(samp_g1, samp_g2)
     media_sg1 = np.mean(samp_g1)
     media_sg2 = np.mean(samp_g2)
-    print(f'La media del la variable {variable} para el grupo con acceso a crédito {binarize} = 1, es de {round(media_sg1,4)}')
-    print(f'La media del la variable {variable} para el grupo sin acceso a crédito {binarize} = 0, es de {round(media_sg2,4)}')
+    print(f'La media del la variable {variable} para el grupo de ingresos {binarize[-4:]} es de {round(media_sg1,4)}')
+    print(f'La media del la variable {variable} para el grupo de ingresos <= {binarize[-3:]} es de {round(media_sg2,4)}')
     print(f'La diferencia entre medias es de: {round(abs(media_sg1 - media_sg2),4)}')
     print(f'El estadístico t = {round(t,4)}, el p_value asociado = {round(p_val,5)}')
     if abs(t) > 1.96 or p_val <= 0.05:
-        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1 y el grupo sin acceso a crédito {binarize} = 0, son distintos.')
+        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son distintos.')
     else:
-        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} =1 y el grupo sin acceso a crédito {binarize} = 0 sean distintos.')
+        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} sean distintos.')
         
 def inverse_logit(x):
     '''
