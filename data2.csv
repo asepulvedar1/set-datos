@@ -3455,17 +3455,12 @@ Date;HT;AT;HS;AS;year
 14-12-2020;Antofagasta;Huachipato;2;1;2020
 14-12-2020;Curicó;Cobresal;0;1;2020
 30-12-2020;Union Calera;O'Higgins;0;1;2020
-24-01-2021;Universidad de Chile;Iquique;2;2;2021
-25-01-2021;Universidad Catolica;Palestino;2;3;2021
 16-12-2020;Palestino;Wanderers;3;1;2020
 16-12-2020;Iquique;Universidad de Concepcion;4;0;2020
 16-12-2020;Everton;Unión Española;1;2;2020
 17-12-2020;Audax Italiano;Antofagasta;3;0;2020
 17-12-2020;La Serena;Universidad de Chile;0;0;2020
 17-12-2020;Huachipato;Curicó;1;0;2020
-23-01-2021;Colo Colo;Coquimbo;2;1;2021
-23-01-2021;Cobresal;Union Calera;1;1;2021
-30-01-2021;O'Higgins;Universidad Catolica;2;0;2021
 19-12-2020;Universidad Catolica;Colo Colo;0;0;2020
 20-12-2020;Palestino;Audax Italiano;1;0;2020
 20-12-2020;Antofagasta;Wanderers;1;1;2020
@@ -3473,8 +3468,6 @@ Date;HT;AT;HS;AS;year
 20-12-2020;Coquimbo;O'Higgins;0;3;2020
 21-12-2020;Universidad de Concepcion;La Serena;0;2;2020
 22-12-2020;Everton;Cobresal;3;0;2020
-28-01-2021;Union Calera;Iquique;1;2;2021
-31-01-2021;Curicó;Unión Española;2;4;2021
 26-12-2020;Wanderers;O'Higgins;1;0;2020
 27-12-2020;Unión Española;Antofagasta;1;1;2020
 27-12-2020;Huachipato;Coquimbo;0;1;2020
@@ -3482,116 +3475,3 @@ Date;HT;AT;HS;AS;year
 28-12-2020;Iquique;Palestino;0;2;2020
 28-12-2020;Cobresal;Universidad de Chile;2;0;2020
 28-12-2020;Universidad de Concepcion;Everton;0;0;2020
-24-01-2021;La Serena;Curicó;2;0;2021
-31-01-2021;Colo Colo;Union Calera;2;1;2021
-02-01-2021;O'Higgins;La Serena;1;1;2021
-02-01-2021;Everton;Iquique;1;0;2021
-02-01-2021;Union Calera;Wanderers;3;0;2021
-03-01-2021;Antofagasta;Colo Colo;0;1;2021
-03-01-2021;Universidad de Chile;Universidad de Concepcion;2;0;2021
-04-01-2021;Palestino;Curicó;4;2;2021
-04-01-2021;Universidad Catolica;Huachipato;3;0;2021
-04-01-2021;Audax Italiano;Unión Española;2;2;2021
-04-02-2021;Coquimbo;Cobresal;0;1;2021
-06-01-2021;Wanderers;Colo Colo;3;0;2021
-06-01-2021;La Serena;Everton;1;1;2021
-06-01-2021;Universidad de Chile;O'Higgins;0;1;2021
-07-01-2021;Curicó;Antofagasta;2;0;2021
-07-01-2021;Universidad de Concepcion;Palestino;1;1;2021
-07-01-2021;Huachipato;Union Calera;4;3;2021
-07-01-2021;Iquique;Universidad Catolica;0;1;2021
-08-01-2021;Cobresal;Audax Italiano;1;2;2021
-26-01-2021;Unión Española;Coquimbo;0;1;2021
-10-01-2021;Universidad Catolica;Curicó;1;1;2021
-10-01-2021;Colo Colo;Everton;1;0;2021
-10-01-2021;Union Calera;Universidad de Concepcion;1;2;2021
-11-01-2021;Palestino;Unión Española;2;2;2021
-11-01-2021;Antofagasta;La Serena;2;2;2021
-11-01-2021;Wanderers;Cobresal;1;0;2021
-11-01-2021;Audax Italiano;Huachipato;2;0;2021
-12-01-2021;O'Higgins;Iquique;2;2;2021
-29-01-2021;Coquimbo;Universidad de Chile;0;1;2021
-13-01-2021;Universidad de Concepcion;Colo Colo;1;1;2021
-14-01-2021;Everton;Audax Italiano;2;1;2021
-14-01-2021;Universidad de Chile;Palestino;1;1;2021
-14-01-2021;Unión Española;Universidad Catolica;1;1;2021
-15-01-2021;Cobresal;Antofagasta;3;1;2021
-15-01-2021;La Serena;Union Calera;0;3;2021
-15-01-2021;Curicó;O'Higgins;1;3;2021
-15-01-2021;Huachipato;Wanderers;4;0;2021
-01-02-2021;Iquique;Coquimbo;2;2;2021
-17-01-2021;Colo Colo;Universidad de Chile;0;0;2021
-18-01-2021;Palestino;Cobresal;3;2;2021
-18-01-2021;Wanderers;La Serena;0;0;2021
-18-01-2021;Audax Italiano;Union Calera;0;3;2021
-19-01-2021;Antofagasta;Iquique;3;1;2021
-19-01-2021;Huachipato;Unión Española;4;1;2021
-19-01-2021;Universidad Catolica;Everton;1;1;2021
-19-01-2021;O'Higgins;Universidad de Concepcion;0;0;2021
-20-01-2021;Coquimbo;Curicó;0;0;2021
-05-02-2021;La Serena;Universidad Catolica;1;2;2021
-05-02-2021;Union Calera;Antofagasta;1;1;2021
-05-02-2021;Curicó;Wanderers;1;3;2021
-06-02-2021;O'Higgins;Audax Italiano;0;0;2021
-06-02-2021;Everton;Palestino;1;3;2021
-06-02-2021;Universidad de Chile;Unión Española;3;0;2021
-06-02-2021;Iquique;Colo Colo;0;0;2021
-07-02-2021;Universidad de Concepcion;Coquimbo;2;1;2021
-07-02-2021;Cobresal;Huachipato;2;1;2021
-10-02-2021;Antofagasta;O'Higgins;1;0;2021
-10-02-2021;Unión Española;La Serena;1;1;2021
-10-02-2021;Curicó;Universidad de Chile;0;0;2021
-10-02-2021;Universidad Catolica;Union Calera;0;0;2021
-11-02-2021;Audax Italiano;Iquique;1;1;2021
-11-02-2021;Wanderers;Universidad de Concepcion;1;1;2021
-11-02-2021;Coquimbo;Everton;3;0;2021
-11-02-2021;Colo Colo;Cobresal;0;0;2021
-11-02-2021;Huachipato;Palestino;1;0;2021
-13-02-2021;Union Calera;Curicó;2;3;2021
-13-02-2021;Universidad de Chile;Antofagasta;3;1;2021
-14-02-2021;Universidad de Concepcion;Universidad Catolica;1;2;2021
-14-02-2021;Everton;Huachipato;1;0;2021
-14-02-2021;Iquique;Wanderers;2;0;2021
-14-02-2021;La Serena;Audax Italiano;0;2;2021
-14-02-2021;Palestino;Coquimbo;2;2;2021
-14-02-2021;O'Higgins;Colo Colo;1;1;2021
-15-02-2021;Cobresal;Unión Española;4;1;2021
-27-03-2021;Curicó;Melipilla;2;0;2021
-27-03-2021;Everton;O'Higgins;1;1;2021
-27-03-2021;Colo Colo;Union Calera;0;0;2021
-27-03-2021;Unión Española;Wanderers;3;1;2021
-28-03-2021;Palestino;Antofagasta;2;5;2021
-28-03-2021;Huachipato;Cobresal;0;0;2021
-28-03-2021;Ñublense;Universidad Catolica;0;1;2021
-30-03-2021;Audax Italiano;La Serena;2;1;2021
-02-04-2021;Antofagasta;Everton;1;2;2021
-02-04-2021;Union Calera;Unión Española;1;0;2021
-03-04-2021;Melipilla;Ñublense;1;1;2021
-03-04-2021;Universidad de Chile;Huachipato;1;1;2021
-03-04-2021;Cobresal;Colo Colo;1;2;2021
-04-04-2021;La Serena;Curicó;2;0;2021
-04-04-2021;Universidad Catolica;Palestino;2;1;2021
-04-04-2021;O'Higgins;Audax Italiano;0;0;2021
-10-04-2021;Unión Española;Melipilla;0;2;2021
-10-04-2021;Audax Italiano;Universidad Catolica;1;0;2021
-11-04-2021;La Serena;Universidad de Chile;0;0;2021
-11-04-2021;Wanderers;Union Calera;1;2;2021
-11-04-2021;Colo Colo;O'Higgins;1;2;2021
-12-04-2021;Ñublense;Cobresal;3;1;2021
-12-04-2021;Palestino;Everton;1;1;2021
-12-04-2021;Curicó;Antofagasta;1;1;2021
-16-04-2021;Melipilla;Palestino;0;1;2021
-16-04-2021;Huachipato;Ñublense;5;3;2021
-16-04-2021;Universidad Catolica;Curicó;2;1;2021
-17-04-2021;O'Higgins;La Serena;0;0;2021
-17-04-2021;Union Calera;Audax Italiano;1;1;2021
-18-04-2021;Cobresal;Wanderers;2;1;2021
-18-04-2021;Everton;Colo Colo;0;2;2021
-19-04-2021;Universidad de Chile;Unión Española;2;1;2021
-23-04-2021;Curicó;Everton;1;1;2021
-24-04-2021;Antofagasta;Cobresal;2;1;2021
-24-04-2021;La Serena;Unión Española;0;0;2021
-24-04-2021;O'Higgins;Union Calera;1;0;2021
-24-04-2021;Wanderers;Ñublense;1;2;2021
-25-04-2021;Colo Colo;Universidad de Chile;1;0;2021
-26-04-2021;Audax Italiano;Melipilla;1;0;2021
