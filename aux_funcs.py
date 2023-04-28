@@ -192,7 +192,7 @@ def sns_grouped_scatterplot(dataframe, x, y, gb):
     Retorno: La función devuelve un gráfico de dispersión de las variables x e y para cada valor de la variable definida en
     el parámetro gb.
     '''
-    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2)
+    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2, size=3)
     grid = grid.map(sns.scatterplot, x, y, marker='o', s=50, color = 'darkblue')
     
     
@@ -263,18 +263,18 @@ def f_test_hipotesis(df,variable,binarize):
     t, p_val = stats.ttest_ind(samp_g1, samp_g2)
     media_sg1 = np.mean(samp_g1)
     media_sg2 = np.mean(samp_g2)
-    print(f'La media del la variable {variable} para el grupo de ingresos {binarize[-4:]} es de {round(media_sg1,4)}')
-    print(f'La media del la variable {variable} para el grupo de ingresos <= {binarize[-3:]} es de {round(media_sg2,4)}')
+    print(f'La media del la variable {variable} para el grupo con acceso a crédito {binarize} = 1, es de {round(media_sg1,4)}')
+    print(f'La media del la variable {variable} para el grupo sin acceso a crédito {binarize} = 0, es de {round(media_sg2,4)}')
     print(f'La diferencia entre medias es de: {round(abs(media_sg1 - media_sg2),4)}')
     print(f'El estadístico t = {round(t,4)}, el p_value asociado = {round(p_val,5)}')
     if abs(t) > 1.96 or p_val <= 0.05:
-        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son distintos.')
+        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1 y el grupo sin acceso a crédito {binarize} = 0, son distintos.')
     else:
-        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo de ingresos {binarize[-4:]} y el grupo de ingresos {binarize[-3:]} sean distintos.')
+        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} =1 y el grupo sin acceso a crédito {binarize} = 0 sean distintos.')
         
 def inverse_logit(x):
     '''
@@ -352,7 +352,11 @@ def plot_importance(fit_model, feat_names):
     modelname = str(fit_model).split('(')[0]
     plt.title('Feature importance '+modelname, fontsize = 30)
     plt.barh(range(len(feat_names)), tmp_importance[sort_importances])
-    plt.yticks(range(len(feat_names)), names, rotation=0, fontsize = 30)
+    plt.yticks(range(len(feat_names)), names, rotation=0, fontsize = 20)
+#     plt.xlabel('Importancia relativa', fontsize=20)
+#     plt.ylabel('Atributos',fontsize=20)
+#     plt.xticks(fontsize=20)
+#     plt.yticks(fontsize=20)
    
     
     
@@ -597,21 +601,43 @@ def to_labels(pos_probs, threshold):
     """
     return (pos_probs >= threshold).astype('int')
 
-def tto_outliers(df, campo):
-    '''
-    Definición:
-    Genera variables transformadas considerando tratamiento de outliers, de modo que reemplaza los valores /
-    outliers por los valores de los percentiles 75 y 25, según la regla de  distancia de 1.5 veces el rango intercuartílico / 
-    (Q3 - Q1).
-    Parámetros:
-    1. 'df': representa el dataframe de pandas que se está analizando.
-    2. 'campo': corresponde a la variables que se requiere transformar.
-    '''
-    campo1 = campo+'_tr'
-    df[campo1] = df[campo]
-    rs = stats.iqr(df[campo])*1.5+df[campo].describe()[6]
-    ri = df[campo].describe()[4]-stats.iqr(df[campo])*1.5
-    mask1 = df[campo] > rs
-    mask2 = df[campo] < ri
-    df.loc[mask1,campo1] = rs
-    df.loc[mask2,campo1] = ri
+
+def train_test_over_params(model, params, X_train, X_test, y_train, y_test):
+    """TODO: Docstring for train_test_over_params.
+
+    :model: TODO
+    :params: TODO
+    :X_train: TODO
+    :X_test: TODO
+    :y_train: TODO
+    :y_test: TODO
+    :returns: TODO
+
+    """
+    tmp_train, tmp_test = [], []
+    values = list(params.values())[0]
+    hyperparam = str(list(params.keys())[0])
+
+
+    for i in values:
+        params_spec = {hyperparam: i}
+        tmp_model = model.set_params(**params_spec).fit(X_train, y_train)
+        tmp_train.append(mean_squared_error(y_train, tmp_model.predict(X_train)))
+        tmp_test.append(mean_squared_error(y_test, tmp_model.predict(X_test)))
+
+        # if model is DecisionTreeRegressor():
+            # # tmp_train.append(mean_squared_error(y_train, tmp_model.predict(X_train)))
+            # # tmp_test.append(mean_squared_error(y_test, tmp_model.predict(X_test)))
+        # elif model is DecisionTreeClassifier():
+            # # tmp_train.append(roc_auc_score(y_train, tmp_model.predict(X_train)))
+            # # tmp_test.append(roc_auc_score(y_test, tmp_model.predict(X_test)))
+
+
+    plt.plot(values, tmp_train, 'o-',color='dodgerblue', label='Train')
+    plt.plot(values, tmp_test,'o-', color='tomato', label='Test')
+    plt.legend()
+    plt.title(hyperparam)
+    # tmp_best_score = tmp_test[np.max(tmp_test)]
+    # plt.axvline(tmp_best_score, color='slategrey',
+                # linestyle='--',
+                # label="Best {} on test: {}".format(hyperparam, round(tmp_best_score, 3)))
