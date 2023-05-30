@@ -641,3 +641,46 @@ def train_test_over_params(model, params, X_train, X_test, y_train, y_test):
     # plt.axvline(tmp_best_score, color='slategrey',
                 # linestyle='--',
                 # label="Best {} on test: {}".format(hyperparam, round(tmp_best_score, 3)))
+
+def tto_outliers(df, campo):
+    '''
+    Definición:
+    Genera variables transformadas considerando tratamiento de outliers, de modo que reemplaza los valores /
+    outliers por los valores de los percentiles 75 y 25, según la regla de  distancia de 1.5 veces el rango intercuartílico / 
+    (Q3 - Q1).
+    Parámetros:
+    1. 'df': representa el dataframe de pandas que se está analizando.
+    2. 'campo': corresponde a la variables que se requiere transformar.
+    '''
+    campo1 = campo+'_tr'
+    df[campo1] = df[campo]
+    rs = stats.iqr(df[campo])*1.5+df[campo].describe()[6]
+    ri = df[campo].describe()[4]-stats.iqr(df[campo])*1.5
+    mask1 = df[campo] > rs
+    mask2 = df[campo] < ri
+    df.loc[mask1,campo1] = rs
+    df.loc[mask2,campo1] = ri
+    
+    
+def missing(df,var):
+
+    """Description of the Function
+    Esta funcion calcula los valores perdidos de variables de un
+    data frame
+
+    Parameters:
+    df: data frame
+    var: variable del data frame
+
+    Returns:
+    devuelve una cuarteta, con la cantidad de valores perdidos de la variable 'var', el porcentaje de valores faltantes, la sumatoria deL vector objetivo para las identificaciones nulas de la variable 'var', y el porcentaje que representa esa sumatoria del vector objetivo en el total de valores del vector objetivo.
+
+   """
+
+    n_perdidos = len(df[df[var].isna()][var])
+    n_total = len(df[var])
+    porc = (n_perdidos / n_total)*100
+    vo_var_null = df[df[var].isna() == True]['status'].count()
+    porc_vo_var_null = (vo_var_null/df['status'].count())*100
+
+    return n_perdidos, porc, vo_var_null, porc_vo_var_null
