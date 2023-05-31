@@ -171,15 +171,15 @@ def fun_hist(df, variable, binarize):
     dat = df
     samp_g1 = dat[dat[binarize]==1][variable].dropna()
     samp_g2 = dat[dat[binarize]==0][variable].dropna()
-    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: tiene acceso a credito', bins=10)
-    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: no tiene acceso a credito', bins=10)
+    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: StartUp acquired', bins=10)
+    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: StartUp closed', bins=10)
     plt.xlabel(variable)
     plt.ylabel('Frecuencia')
-    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: tiene acceso a credito')
-    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: no tiene acceso a credito')
+    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: StartUp acquired')
+    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: StartUp closed')
     plt.legend();
     #plt.show()
-    
+
     
 def sns_grouped_scatterplot(dataframe, x, y, gb):
     '''
@@ -263,18 +263,18 @@ def f_test_hipotesis(df,variable,binarize):
     t, p_val = stats.ttest_ind(samp_g1, samp_g2)
     media_sg1 = np.mean(samp_g1)
     media_sg2 = np.mean(samp_g2)
-    print(f'La media del la variable {variable} para el grupo con acceso a crédito {binarize} = 1, es de {round(media_sg1,4)}')
-    print(f'La media del la variable {variable} para el grupo sin acceso a crédito {binarize} = 0, es de {round(media_sg2,4)}')
+    print(f'La media del la variable {variable} para el grupo de StartUps que son adquiridas {binarize} = 1, es de {round(media_sg1,4)}')
+    print(f'La media del la variable {variable} para el grupo de StartUps que son cerradas {binarize} = 0, es de {round(media_sg2,4)}')
     print(f'La diferencia entre medias es de: {round(abs(media_sg1 - media_sg2),4)}')
     print(f'El estadístico t = {round(t,4)}, el p_value asociado = {round(p_val,5)}')
     if abs(t) > 1.96 or p_val <= 0.05:
-        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de StartUps adquiridas {binarize} = 1, y el grupo de StartUps que son cerradas {binarize} = 0 son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1 y el grupo sin acceso a crédito {binarize} = 0, son distintos.')
+        print(f'Por lo tanto, se concluye, con un nivel de confianza del 95% que para la variable {variable} los promedios entre el grupo de StartUps adquiridas {binarize} = 1 y el grupo de StartUps que son cerradas {binarize} = 0, son distintos.')
     else:
-        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} = 1, y el grupo sin acceso a crédito {binarize} = 0 son iguales.')
+        print(f'Considerando un nivel de significancia del 5%, no existe evidencia estadística suficiente como para rechazar la hipótesis nula de que para la variable {variable} los promedios entre el grupo de StartUps adquiridas {binarize} = 1, y el grupo de StartUps que son cerradas {binarize} = 0 son iguales.')
         print('\n')
-        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo con acceso a crédito {binarize} =1 y el grupo sin acceso a crédito {binarize} = 0 sean distintos.')
+        print(f'Por lo tanto, se concluye, que con un nivel de confianza del 95% no es posible rechazar que para la variable {variable} los promedios entre el grupo de StartUps adquiridas {binarize} =1 y el grupo de StartUps que son cerradas {binarize} = 0 sean distintos.')
         
 def inverse_logit(x):
     '''
