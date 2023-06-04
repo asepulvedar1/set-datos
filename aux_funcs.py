@@ -684,3 +684,50 @@ def missing(df,var):
     porc_vo_var_null = (vo_var_null/df['status'].count())*100
 
     return n_perdidos, porc, vo_var_null, porc_vo_var_null
+
+# funciones de ayudas para analisis
+def generate_report(model, x_test, y_test):
+  # Error de test del modelo inicial
+  predicciones = model.predict(X = x_test)
+
+  mat_confusion = confusion_matrix(
+                      y_true    = y_test,
+                      y_pred    = predicciones
+                  )
+
+  accuracy = accuracy_score(
+              y_true    = y_test,
+              y_pred    = predicciones,
+              normalize = True
+            )
+
+  print("Matriz de confusión")
+  print("-------------------")
+  print(mat_confusion)
+  print("")
+  print(pd.crosstab(
+      y_test,
+      predicciones,
+      rownames=['Real'],
+      colnames=['Predicción'],
+      normalize='index'
+  ).round(4)*100)
+  print("")
+  print(
+      classification_report(
+          y_true = y_test,
+          y_pred = predicciones
+      )
+  )
+
+  print('')
+  print(f"El accuracy de test es: {100 * accuracy} %")
+
+def get_accuracy(model, x_test, y_test):
+  predicciones = model.predict(X = x_test)
+  accuracy = accuracy_score(
+              y_true    = y_test,
+              y_pred    = predicciones,
+              normalize = True
+            )
+  return accuracy
