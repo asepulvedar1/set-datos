@@ -171,12 +171,12 @@ def fun_hist(df, variable, binarize):
     dat = df
     samp_g1 = dat[dat[binarize]==1][variable].dropna()
     samp_g2 = dat[dat[binarize]==0][variable].dropna()
-    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: StartUp acquired', bins=10)
-    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: StartUp closed', bins=10)
+    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: cliente con mora', bins=10)
+    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: cliente sin mora', bins=10)
     plt.xlabel(variable)
     plt.ylabel('Frecuencia')
-    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: StartUp acquired')
-    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: StartUp closed')
+    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: cliente con mora')
+    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: cliente sin mora')
     plt.legend();
     #plt.show()
 
@@ -192,7 +192,7 @@ def sns_grouped_scatterplot(dataframe, x, y, gb):
     Retorno: La función devuelve un gráfico de dispersión de las variables x e y para cada valor de la variable definida en
     el parámetro gb.
     '''
-    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2)#, size=3)
+    grid = sns.FacetGrid(dataframe, col = gb, col_wrap=2, size=3)
     grid = grid.map(sns.scatterplot, x, y, marker='o', s=50, color = 'darkblue')
     
     
@@ -685,49 +685,42 @@ def missing(df,var):
 
     return n_perdidos, porc, vo_var_null, porc_vo_var_null
 
+
 # funciones de ayudas para analisis
 def generate_report(model, x_test, y_test):
-  # Error de test del modelo inicial
-  predicciones = model.predict(X = x_test)
+    # Error de test del modelo inicial
+    predicciones = model.predict(X = x_test)
+    mat_confusion = confusion_matrix(
+        y_true    = y_test,
+        y_pred    = predicciones)
+    accuracy = accuracy_score(
+        y_true    = y_test,
+        y_pred    = predicciones,
+        normalize = True)
+    
+    print("Matriz de confusión")
+    print("-------------------")
+    print(mat_confusion)
+    print("")
+    print(pd.crosstab(
+        y_test,
+        predicciones,
+        rownames=['Real'],
+        colnames=['Predicción'],
+        normalize='index').round(4)*100)
+    print("")
+    print(
+        classification_report(
+            y_true = y_test, y_pred = predicciones))
 
-  mat_confusion = confusion_matrix(
-                      y_true    = y_test,
-                      y_pred    = predicciones
-                  )
-
-  accuracy = accuracy_score(
-              y_true    = y_test,
-              y_pred    = predicciones,
-              normalize = True
-            )
-
-  print("Matriz de confusión")
-  print("-------------------")
-  print(mat_confusion)
-  print("")
-  print(pd.crosstab(
-      y_test,
-      predicciones,
-      rownames=['Real'],
-      colnames=['Predicción'],
-      normalize='index'
-  ).round(4)*100)
-  print("")
-  print(
-      classification_report(
-          y_true = y_test,
-          y_pred = predicciones
-      )
-  )
-
-  print('')
-  print(f"El accuracy de test es: {100 * accuracy} %")
+    print('')
+    print(f"El accuracy de test es: {100 * accuracy} %")
 
 def get_accuracy(model, x_test, y_test):
-  predicciones = model.predict(X = x_test)
-  accuracy = accuracy_score(
-              y_true    = y_test,
-              y_pred    = predicciones,
-              normalize = True
-            )
-  return accuracy
+    predicciones = model.predict(X = x_test)
+    accuracy = accuracy_score(
+        y_true    = y_test,
+        y_pred    = predicciones,
+        normalize = True)
+
+    return accuracy
