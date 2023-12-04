@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.stats as stats
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import re
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
@@ -15,7 +15,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, roc_curve, roc_auc_score, accuracy_score, auc, mean_squared_error, r2_score, confusion_matrix
 
-def rep_ed(obj, dna = True):
+def rep_ed(obj, dna = True, norm = False):
     '''
     Definición: La función rep_ed(), devuelve un reporte de estadísticas descriptivas (usando el método 'describe()', para una serie que contenga variables contínuas. Si la serie contiene una variable discreta, entonces devuelve la frecuencia usando 'value_counts()'
     Parámetros: 
@@ -25,7 +25,7 @@ def rep_ed(obj, dna = True):
     for i in obj.columns:
         if obj[i].dtype == 'object':
             print('variable: ', i)
-            print(obj[i].value_counts(dropna = dna))
+            print(obj[i].value_counts(dropna = dna, normalize = norm))
         else:
             print('variable: ', i)
             print(obj[i].describe())
@@ -171,12 +171,12 @@ def fun_hist(df, variable, binarize):
     dat = df
     samp_g1 = dat[dat[binarize]==1][variable].dropna()
     samp_g2 = dat[dat[binarize]==0][variable].dropna()
-    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: cliente con mora', bins=10)
-    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: cliente sin mora', bins=10)
+    plt.hist(samp_g1, color='orangered', alpha = 0.6, label='Grupo 1: '+ variable + ' donde ' +  binarize + '= 1: paciente con ' + binarize , bins=10)
+    plt.hist(samp_g2, color='royalblue', alpha = 0.5, label='Grupo 2: '+ variable + ' donde ' + binarize + '= 0: paciente sin '+ binarize, bins=10)
     plt.xlabel(variable)
     plt.ylabel('Frecuencia')
-    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: cliente con mora')
-    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: cliente sin mora')
+    plt.axvline(np.mean(samp_g1), lw=0.5, color='tomato', label='Promedio '+ variable + ' donde ' +  binarize + '= 1: paciente con ' + binarize)
+    plt.axvline(np.mean(samp_g2), lw=0.5, color='dodgerblue', label='Promedio '+ variable+ ' donde ' + binarize + '= 0: paciente sin '+ binarize)
     plt.legend();
     #plt.show()
 
@@ -326,16 +326,19 @@ def plot_hist(dataframe, variable):
     plt.title('Histograma de la variable '+ variable)
     plt.show()
     
-def report_scores(pred, val):
+def report_scores(val, pred):
     '''
     Definición: Imprime las métricas del Error Cuadrático Medio y R^2, en base a los vectores de datos predichos 'pred' y vector de datos a validar 'val'
     Parámetros:
-    1. 'pred': vector de datos predichos.
-    2. 'val': vector de datos por validar.
-    Retorno: Imprime en pantalla los valores del Error Cuadrático Medio y R^2.
+    1. 'val': vector de datos por validar.
+    2. 'pred': vector de datos predichos.
+    
+    Retorno: Imprime en pantalla los valores del Error Cuadrático Medio , la Raíz del Error Cuadrático Medio y el Error Absoluto Medio y R^2.
     '''
-    print(f'Error cuadrático medio {round(mean_squared_error(val, pred),2)}')
-    print(f'R^2 {round(r2_score(val, pred),2)}')
+    print(f'Error cuadrático medio MSE: {round(mean_squared_error(val, pred),2)}')
+    print(f'Raíz del Error cuadrático medio RMSE: {np.sqrt(round(mean_squared_error(val, pred),2))}')
+    print(f'Error absoluto medio MAE:  {round(mean_absolute_error(val, pred),2)}')
+    print(f'R^2: {round(r2_score(val, pred),2)}')
     
     
 def plot_importance(fit_model, feat_names):
